@@ -132,12 +132,6 @@ public class ConfigOptions {
             plugin.getConfig().set("database", null);
         }
 
-        // add extra options to the proxy database
-        if (plugin.getConfig().isSet("databases.example-proxy.type") && !plugin.getConfig().isSet("databases.example-proxy.skins")) {
-            plugin.getConfig().set("databases.example-proxy.skins", true);
-            plugin.getConfig().set("databases.example-proxy.database-sync", true);
-        }
-
         if (plugin.getConfig().isSet("bounty-whitelist.enable-blacklist")) {
             plugin.getConfig().set("bounty-whitelist.allow-toggling-whitelist", plugin.getConfig().getBoolean("bounty-whitelist.enable-blacklist"));
             plugin.getConfig().set("bounty-whitelist.enable-blacklist", null);

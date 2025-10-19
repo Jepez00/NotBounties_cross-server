@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm -rf \"src/main/java/me/jadenp/notbounties/features/settings/databases/proxy\")",
+      "Bash(mvn clean compile)",
+      "Bash(mvn clean compile -U -DskipTests)",
+      "Bash(mvn compile -e)",
+      "Bash(mvn clean compile -DskipTests)",
+      "Bash(mvn clean package -o -DskipTests)",
+      "Bash(mvn package -Dmaven.test.skip=true)",
+      "Bash(mvn compile)",
+      "Bash(awk -F: '{print $1}')",
+      "Bash(mvn clean package -DskipTests)",
+      "Bash(mvn compile 2)",
+      "Bash(1)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -7,7 +7,6 @@ import me.jadenp.notbounties.NotBounties;
 import me.jadenp.notbounties.data.Bounty;
 import me.jadenp.notbounties.data.player_data.PlayerData;
 import me.jadenp.notbounties.features.ConfigOptions;
-import me.jadenp.notbounties.features.settings.databases.proxy.ProxyMessaging;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
@@ -165,8 +164,6 @@ public class LoggedPlayers {
         if (isMissing(player.getUniqueId())) {
             // if not, add them
             DataManager.getPlayerData(player.getUniqueId()).setPlayerName(player.getName());
-            // send a proxy message to log
-            ProxyMessaging.logNewPlayer(player.getName(), player.getUniqueId());
         } else {
             // if they are, check if their username has changed, and update it
             if (!getPlayerName(player.getUniqueId()).equals(player.getName())) {

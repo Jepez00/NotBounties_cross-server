@@ -11,8 +11,6 @@ import me.jadenp.notbounties.features.settings.databases.AsyncDatabaseWrapper;
 import me.jadenp.notbounties.features.settings.databases.LocalData;
 import me.jadenp.notbounties.features.settings.databases.NotBountiesDatabase;
 import me.jadenp.notbounties.features.settings.databases.TempDatabase;
-import me.jadenp.notbounties.features.settings.databases.proxy.ProxyDatabase;
-import me.jadenp.notbounties.features.settings.databases.proxy.ProxyMessaging;
 import me.jadenp.notbounties.features.settings.databases.redis.RedisConnection;
 import me.jadenp.notbounties.features.settings.databases.sql.MySQL;
 import me.jadenp.notbounties.features.settings.display.BountyTracker;
@@ -88,18 +86,6 @@ public class DataManager {
         return localData;
     }
 
-    public static void connectProxy(List<Bounty> bounties, Map<UUID, PlayerStat> playerStatMap, List<PlayerData> playerDataMap) {
-        // turn local data into proxy database
-        NotBounties.getServerImplementation().async().runNow(task -> {
-            for (AsyncDatabaseWrapper database : databases) {
-                if (database.getDatabase() instanceof ProxyDatabase) {
-                    syncDatabase(database.getDatabase(), bounties, playerStatMap, playerDataMap);
-                }
-            }
-            ProxyMessaging.setDataSynced(true);
-        });
-
-    }
 
     /**
      * Load the database configuration.
@@ -154,7 +140,6 @@ public class DataManager {
             switch (type.toUpperCase()) {
                 case "SQL" -> database = new MySQL(NotBounties.getInstance(), databaseName);
                 case "REDIS" -> database = new RedisConnection(NotBounties.getInstance(), databaseName);
-                case "PROXY" -> database = new ProxyDatabase(NotBounties.getInstance(), databaseName);
                 default -> throw new IllegalArgumentException("Unknown database type for " + databaseName + ": " + type);
 
             }

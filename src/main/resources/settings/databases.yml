@@ -6,7 +6,7 @@
 auto-connect-interval: 0
 # you can change 'example-sql' to a different name if it helps you keep track of it
 example-sql:
-  # the type of database: SQL, REDIS, or PROXY
+  # the type of database: SQL or REDIS
   type: SQL
   # all the regular database options
   host: localhost
@@ -32,12 +32,3 @@ example-redis:
   refresh-interval: 60
   # higher priority means that this database will be used more
   priority: 2
-example-proxy:
-  type: PROXY
-  # Whether proxy messaging is enabled.
-  enabled: false
-  # Whether bounties and player stats will be synchronized with other servers connected to the proxy.
-  database-sync: true
-  # Whether skins can be obtained from the proxy. This is mainly used for SkinsRestorer
-  skins: true
-  priority: 3

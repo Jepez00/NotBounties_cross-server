@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import me.jadenp.notbounties.NotBounties;
-import me.jadenp.notbounties.features.settings.databases.proxy.ProxyMessaging;
 import me.jadenp.notbounties.features.ConfigOptions;
 import me.jadenp.notbounties.features.settings.money.NumberFormatting;
 import org.apache.hc.client5.http.auth.AuthScope;
@@ -72,7 +71,7 @@ public class LocalTime {
     private static String formatTime(long time, Player player) {
         if (!ConfigOptions.isAutoTimezone())
             return formatTime(time, player.getLocale());
-        if (lastException + ERROR_TIMEOUT_MS > System.currentTimeMillis() || ProxyMessaging.hasConnectedBefore())
+        if (lastException + ERROR_TIMEOUT_MS > System.currentTimeMillis())
             return formatTime(time, player.getLocale());
         if (license == null) {
             try {

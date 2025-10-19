@@ -14,7 +14,6 @@ import me.jadenp.notbounties.features.challenges.ChallengeManager;
 import me.jadenp.notbounties.features.settings.auto_bounties.RandomBounties;
 import me.jadenp.notbounties.features.settings.auto_bounties.TimedBounties;
 import me.jadenp.notbounties.features.settings.databases.AsyncDatabaseWrapper;
-import me.jadenp.notbounties.features.settings.databases.proxy.ProxyMessaging;
 import me.jadenp.notbounties.features.settings.display.BountyHunt;
 import me.jadenp.notbounties.features.settings.display.BountyHuntTypeAdapter;
 import me.jadenp.notbounties.features.settings.display.BountyTracker;
@@ -59,7 +58,6 @@ public class SaveManager {
                     DataManager.getAndSyncDatabase(database.getDatabase());
                 }
             }
-            saveUnsentProxyMessages(dataDirectory);
         }
 
         // the three amigos
@@ -480,11 +478,5 @@ public class SaveManager {
         reader.endArray();
 
         return data;
-    }
-
-    public static void saveUnsentProxyMessages(File dataDirectory) {
-        List<byte[]> messages = ProxyMessaging.getUnsentMessages();
-        File saveFile = new File(dataDirectory + File.separator + "proxy_message_cache.json");
-        s
     }
 }

@@ -7,8 +7,6 @@ import com.cjcrafter.foliascheduler.ServerImplementation;
 import me.jadenp.notbounties.data.*;
 import me.jadenp.notbounties.features.settings.auto_bounties.*;
 import me.jadenp.notbounties.features.settings.databases.AsyncDatabaseWrapper;
-import me.jadenp.notbounties.features.settings.databases.proxy.ProxyDatabase;
-import me.jadenp.notbounties.features.settings.databases.proxy.ProxyMessaging;
 import me.jadenp.notbounties.features.settings.display.BountyHunt;
 import me.jadenp.notbounties.features.settings.display.BountyTracker;
 import me.jadenp.notbounties.features.settings.display.WantedTags;
@@ -56,15 +54,10 @@ import static me.jadenp.notbounties.features.LanguageOptions.*;
 /**
  * Go through wiki for outdated materials
  * Update front page
- * Separate messages sent to the proxy if they are too big. (Velocity version too)
  * Team bounties
- * Bungee support.
  * Better SQL and Redis config with connection string and address options to replace others.
  * Redo vouchers with persistent data, give items, & reward delay
- * Redis Pub Sub messages for player data storage. - proxy messaging too
- * database message table with server IDs
  * fast database option to use directly instead of an update interval
- * Multiple proxy databases
  * 1.21.6 dialog
  * Option to send api request when setting a bounty on offline player
  *
@@ -201,14 +194,9 @@ public final class NotBounties extends JavaPlugin {
         checkForUpdate(this);
 
         // check permission immunity every 5 mins
-        // sync player data if there is only 1 person online (for proxy)
         getServerImplementation().global().runAtFixedRate(() ->
         {
             ImmunityManager.checkOnlinePermissionImmunity();
-            Collection<? extends Player> players = Bukkit.getOnlinePlayers();
-            if (players.size() == 1 && ProxyDatabase.isEnabled() && ProxyDatabase.isDatabaseSynchronization() && ProxyMessaging.hasConnectedBefore()) {
-                DataManager.syncPlayerData(players.iterator().next().getUniqueId(), null);
-            }
 
         }, 3611, 3600);
 
